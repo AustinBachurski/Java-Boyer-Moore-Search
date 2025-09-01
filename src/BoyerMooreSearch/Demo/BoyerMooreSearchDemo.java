@@ -68,6 +68,10 @@ public class BoyerMooreSearchDemo {
         clearScreen();
         System.out.println("Text is as follows:");
         System.out.println(searchableText);
+        pressEnter();
+    }
+
+    private void pressEnter() {
         System.out.print("Press enter to continue...");
 
         try {
@@ -157,6 +161,7 @@ public class BoyerMooreSearchDemo {
             builder.append(".");
 
             System.out.println(builder.toString());
+            pressEnter();
         }
     }
 }
