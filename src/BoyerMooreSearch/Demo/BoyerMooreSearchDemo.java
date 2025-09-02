@@ -12,21 +12,18 @@ public class BoyerMooreSearchDemo {
         searchableText = readFile(filePath);
     }
 
-    // Search object to store search state.
-    private BoyerMooreSearch searchAlgorithm = new BoyerMooreSearch();
-
     // Scanner to read from the console.
-    private Scanner stdin = new Scanner(System.in);
+    private final Scanner stdin = new Scanner(System.in);
 
     // Input text.
-    private char searchableText[] = {};
+    private char[] searchableText = {};
 
 // PUBLIC METHODS
 
     // Begins the main loop of the demo.
     public void start() {
+        clearScreen();
         System.out.println("Welcome to the interactive demo for my Boyer-Moore Search implementation.");
-
         printMenu();
 
         while (true)
@@ -75,8 +72,8 @@ public class BoyerMooreSearchDemo {
         System.out.print("Press enter to continue...");
 
         try {
-            System.in.read();
-        } catch(IOException e) { }
+            int _ = System.in.read();
+        } catch(IOException e) { return; }
 
         clearScreen();
     }
@@ -105,8 +102,7 @@ public class BoyerMooreSearchDemo {
 
         } catch (Exception e) {
             System.out.println("Failed to open file: " + e);
-            char error[] = {};
-            return error;
+            return new char[]{};
         }
     }
 
@@ -127,25 +123,25 @@ public class BoyerMooreSearchDemo {
 
     // Read a string from the console.
     private String readStringFromConsole(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return stdin.nextLine();
     }
 
     private void search() {
         clearScreen();
-        String pattern = readStringFromConsole("Enter the text you wish to find: ");
-        ArrayList<Integer> results = searchAlgorithm.findAllMatches(searchableText, pattern);
+        String pattern = readStringFromConsole("Enter the text you wish to find (case sensitive): ");
+        ArrayList<Integer> results = BoyerMooreSearch.findAllMatches(searchableText, pattern);
 
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             System.out.println("The pattern \""
                 + pattern
-                + "\" was not found in the text");
+                + "\" was not found in the text.\n");
         } else if (results.size() == 1) {
-            System.out.print("The pattern \""
+            System.out.println("The pattern \""
                 + pattern
                 + "\" was found at index "
                 + results.getFirst()
-                + ".");
+                + ".\n");
         } else {
             StringBuilder builder = new StringBuilder("The pattern \"");
             builder.append(pattern);
@@ -158,11 +154,11 @@ public class BoyerMooreSearchDemo {
 
             builder.append("and ");
             builder.append(results.getLast());
-            builder.append(".");
+            builder.append(".\n");
 
-            System.out.println(builder.toString());
-            pressEnter();
+            System.out.println(builder);
         }
+        pressEnter();
     }
 }
 
