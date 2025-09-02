@@ -70,11 +70,7 @@ public class BoyerMooreSearchDemo {
 
     private void pressEnter() {
         System.out.print("Press enter to continue...");
-
-        try {
-            int _ = System.in.read();
-        } catch(IOException e) { return; }
-
+        String _ = stdin.nextLine();
         clearScreen();
     }
 
